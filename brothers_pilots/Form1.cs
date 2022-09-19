@@ -38,7 +38,8 @@ namespace brothers_pilots
                         Location = new Point(i*size + xshift, j*size+ yshift),
                         Name = i.ToString() + ' ' + j.ToString(),
                         BackColor = Color.White,
-                        Image = Properties.Resources.horizontal,
+                        //Image = Properties.Resources.horizontal,
+                        BackgroundImage = Properties.Resources.horizontal,
                         BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom,
                         
                 };
@@ -138,12 +139,13 @@ namespace brothers_pilots
             if (button.ImageKey == "0")
             {
                 button.ImageKey = "1";
-                button.Image = Properties.Resources.vertical;
+                //button.Image = Properties.Resources.vertical;
+                button.BackgroundImage = Properties.Resources.vertical;
             }
             else
             {
                 button.ImageKey = "0";
-                button.Image = Properties.Resources.horizontal;
+                button.BackgroundImage = Properties.Resources.horizontal;
             }
         }
 
@@ -175,6 +177,7 @@ namespace brothers_pilots
             configuration();
             StartGame();
         }
+       
 
         private void button1_Click(object sender, EventArgs e)
         {

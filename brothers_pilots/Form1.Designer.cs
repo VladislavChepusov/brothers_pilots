@@ -63,7 +63,7 @@ namespace brothers_pilots
             // 
             this.numericUpDown1.Location = new System.Drawing.Point(3, 13);
             this.numericUpDown1.Maximum = new decimal(new int[] {
-            20,
+            15,
             0,
             0,
             0});
@@ -73,8 +73,10 @@ namespace brothers_pilots
             0,
             0});
             this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.ReadOnly = true;
             this.numericUpDown1.Size = new System.Drawing.Size(120, 22);
             this.numericUpDown1.TabIndex = 2;
+            this.numericUpDown1.ThousandsSeparator = true;
             this.numericUpDown1.Value = new decimal(new int[] {
             2,
             0,
