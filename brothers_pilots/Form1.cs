@@ -15,6 +15,8 @@ namespace brothers_pilots
         SoundPlayer win_sound = new SoundPlayer(Properties.Resources.win);// Звук победы
         SoundPlayer bye_sound = new SoundPlayer(Properties.Resources.bye);// Грустный тромбон
         public Button[,] levers;//Рычаги
+
+
         public Form1()
         {
             InitializeComponent();
@@ -39,12 +41,14 @@ namespace brothers_pilots
             yshift = (panel2.Height - level * size) / 2;
         }
 
+
         //Загрузка формы
         private void Form1_Load(object sender, EventArgs e)
         {
             configuration();
             StartGame();
         }
+
 
         //Отрисовка рычагов и их запутывание
         private void StartGame()
@@ -92,16 +96,16 @@ namespace brothers_pilots
             }
             catch
             {
-                MessageBox.Show("Ваша машина устала...","Ошибка");
+                MessageBox.Show("Ваша машина устала...", "Ошибка");
                 panel2.Controls.Clear();
                 level = 2;
                 System.Threading.Thread.Sleep(700);
                 configuration();
                 StartGame();
-            }  
+            }
         }
 
-        
+
         //Нажатие на рычаг
         private void button_Click(object sender, EventArgs e)
         {
@@ -120,11 +124,12 @@ namespace brothers_pilots
                 finish();
         }
 
+
         // Переход на следующий раунд
         void finish()
         {
             win_sound.Play();
-            MessageBox.Show("Да вы медвежатник,шеф","МОЕ УВАЖЕНИЕ");
+            MessageBox.Show("Да вы медвежатник,шеф", "МОЕ УВАЖЕНИЕ");
             /*
             for (int i = 0; i < level; ++i)
                 for (int j = 0; j < level; ++j)
@@ -147,7 +152,6 @@ namespace brothers_pilots
                     MessageBox.Show("Всего хорошего!", "До новых встреч!");
                     Application.Exit();
                 }
-
             }
             else
             {
@@ -163,8 +167,10 @@ namespace brothers_pilots
                     MessageBox.Show("Всего хорошего!", "До новых встреч!");
                     Application.Exit();
                 }
-            }     
+            }
         }
+
+
         // Проверка победы
         bool CheckWin()
         {
@@ -206,7 +212,7 @@ namespace brothers_pilots
             }
         }
 
-        
+
         // Изменение размерности (читерство)
         private void button1_Click(object sender, EventArgs e)
         {
@@ -228,8 +234,8 @@ namespace brothers_pilots
             }
             configuration();
             StartGame();
-
         }
+
 
         //Конец игры
         private bool endGame()
@@ -237,9 +243,18 @@ namespace brothers_pilots
             if (level >= 15)
                 return true;
             else
-            return false;
+                return false;
         }
 
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            if (this.WindowState != FormWindowState.Maximized)
+            {
+                //this.Location = default;
+                this.WindowState = FormWindowState.Maximized;
+            }    
+        }
 
         /*
           private int sizecube(int mHeight, int mWidth )
