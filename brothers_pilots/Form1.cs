@@ -20,83 +20,88 @@ namespace brothers_pilots
             InitializeComponent();
         }
 
+
         // Функция расчета размеров экрана и размеров рычагов
         private void configuration()
         {
             this.WindowState = FormWindowState.Maximized;
             //this.TopMost = true;
-
             //panel1.Width = (int)(this.Width * 0.9);
             //panel2.Width = (int)(this.Width * 0.9);
             panel1.Width = (int)(this.Width);
             panel1.Height = (int)(this.Height * 0.1);
-
             panel2.Width = (int)(this.Width);
             panel2.Height = (int)(this.Height * 0.89);
-            
-
             label1.Text = $"Уровень {level - 1}";
             label1.Left = this.Width / 2 - label1.Width;
-
-
             size = sizecube(panel2.Height, panel2.Width);
-
-            //не лучшая моя идея
             xshift = (panel2.Width - level * size) / 2;
             yshift = (panel2.Height - level * size) / 2;
         }
 
-
+        //Загрузка формы
         private void Form1_Load(object sender, EventArgs e)
         {
             configuration();
             StartGame();
         }
 
+        //Отрисовка рычагов и их запутывание
         private void StartGame()
         {
-            levers = new Button[level, level]; // Задаем массив кнопок 
-            int numberMix;
-            int x, y;
-            Random rand = new Random();
-            for (int i = 0; i < level; i++)
+            try
             {
-                for (int j = 0; j < level; j++)
+                levers = new Button[level, level]; // Задаем массив кнопок 
+                int numberMix;
+                int x, y;
+                Random rand = new Random();
+                for (int i = 0; i < level; i++)
                 {
-                    levers[i, j] = new Button
+                    for (int j = 0; j < level; j++)
                     {
-                        Size = new Size(size, size),
-                        ImageKey ="0",
-                        Location = new Point(i*size + xshift, j*size+ yshift),
-                        Name = i.ToString() + ' ' + j.ToString(),
-                        BackColor = Color.FromArgb(240, 240, 240),
-                        BackgroundImage = Properties.Resources.horizontal,
-                        BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom,
-                        
-                };
-                    levers[i, j].Click += new System.EventHandler(button_Click);
-                    panel2.Controls.Add(levers[i, j]);
+                        levers[i, j] = new Button
+                        {
+                            Size = new Size(size, size),
+                            ImageKey = "0",
+                            Location = new Point(i * size + (xshift), j * size + yshift),
+                            Name = i.ToString() + ' ' + j.ToString(),
+                            BackColor = Color.FromArgb(240, 240, 240),
+                            BackgroundImage = Properties.Resources.horizontal,
+                            BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom,
+
+                        };
+                        levers[i, j].Click += new System.EventHandler(button_Click);
+                        panel2.Controls.Add(levers[i, j]);
+                    }
                 }
-            }
-            //Пермеешивание 
-            do
-            {
-                numberMix = rand.Next(level, level + 20);
-                for (int num = 0; num < numberMix; num++)
+                //Пермеешивание 
+                do
                 {
-                    x = rand.Next(0, level);
-                    for (int j = 0; j < level; ++j)
-                        revers(levers[x, j]);
-                    y = rand.Next(0, level);
-                    for (int i = 0; i < level; ++i)
-                        revers(levers[i, y]);
-                    revers(levers[x, y]);
-                }
-            } while (CheckWin());   
+                    numberMix = rand.Next(level, level + 20);
+                    for (int num = 0; num < numberMix; num++)
+                    {
+                        x = rand.Next(0, level);
+                        for (int j = 0; j < level; ++j)
+                            revers(levers[x, j]);
+                        y = rand.Next(0, level);
+                        for (int i = 0; i < level; ++i)
+                            revers(levers[i, y]);
+                        revers(levers[x, y]);
+                    }
+                } while (CheckWin());
+            }
+            catch
+            {
+                MessageBox.Show("Ваша машина устала...","Ошибка");
+                panel2.Controls.Clear();
+                level = 2;
+                System.Threading.Thread.Sleep(700);
+                configuration();
+                StartGame();
+            }  
         }
 
         
-
         //Нажатие на рычаг
         private void button_Click(object sender, EventArgs e)
         {
@@ -120,23 +125,21 @@ namespace brothers_pilots
         {
             win_sound.Play();
             MessageBox.Show("Да вы медвежатник,шеф","МОЕ УВАЖЕНИЕ");
-          
-
+            /*
             for (int i = 0; i < level; ++i)
                 for (int j = 0; j < level; ++j)
                 {
                     panel2.Controls.Remove(levers[i, j]);
                 }
-
+            */
+            panel2.Controls.Clear();
             level += 1;
             if (endGame())
             {
                 MessageBox.Show("Поздравляю с победой!", "Конец игры");
                 if (MessageBox.Show("Начать с начала?", "Вопросы к победилю", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    level = 2;
-                    configuration();
-                    StartGame();
+                    Application.Restart();
                 }
                 else
                 {
@@ -150,7 +153,7 @@ namespace brothers_pilots
             {
                 if (MessageBox.Show("Повышаем ставки?", "Вопросы к победилю", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                   
+                    numericUpDown1.Value = level;
                     configuration();
                     StartGame();
                 }
@@ -207,11 +210,14 @@ namespace brothers_pilots
         // Изменение размерности (читерство)
         private void button1_Click(object sender, EventArgs e)
         {
+            /*
             for (int i = 0; i < level; ++i)
                 for (int j = 0; j < level; ++j)
                 {
                     panel2.Controls.Remove(levers[i, j]);
                 }
+            */
+            panel2.Controls.Clear();
             int nl;
             if (int.TryParse(numericUpDown1.Value.ToString(), out nl))
                 level = nl;
@@ -235,13 +241,11 @@ namespace brothers_pilots
         }
 
 
-
         /*
           private int sizecube(int mHeight, int mWidth )
           {
               // int(sqrt(высота_прямоугольника*ширина_прямоугольника/количество_квадратов))
               int MaxiSize = (int)(Math.Sqrt(mHeight * mWidth / level));
-
               MessageBox.Show("Максимальная сторона квадрата =" + MaxiSize.ToString());
               var numbers = new List<int>();
               for (int i = 1; i <= level; i++)
@@ -271,7 +275,5 @@ namespace brothers_pilots
               return MaxiSize;
           }
        */
-
-
     }
 }
