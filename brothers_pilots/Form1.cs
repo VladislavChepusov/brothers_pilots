@@ -14,7 +14,8 @@ namespace brothers_pilots
         private int yshift = 0;// Сдвиг кубок от углов панеле
         SoundPlayer win_sound = new SoundPlayer(Properties.Resources.win);// Звук победы
         SoundPlayer bye_sound = new SoundPlayer(Properties.Resources.bye);// Грустный тромбон
-        public Button[,] levers;//Рычаги
+        //public Button[,] levers;//Рычаги
+        public RJButton[,] levers;//Рычаги
         public Form1()
         {
             InitializeComponent();
@@ -42,6 +43,13 @@ namespace brothers_pilots
         //Загрузка формы
         private void Form1_Load(object sender, EventArgs e)
         {
+
+            this.BackgroundImage = Properties.Resources.test;
+            panel1.BackColor = Color.FromArgb(0, 0, 0, 0);
+            panel1.Parent = this;
+            panel2.BackColor = Color.FromArgb(0, 0, 0, 0);
+            panel2.Parent = this;
+
             configuration();
             StartGame();
         }
@@ -51,7 +59,8 @@ namespace brothers_pilots
         {
             try
             {
-                levers = new Button[level, level]; // Задаем массив кнопок 
+                //levers = new Button[level, level]; // Задаем массив кнопок 
+                levers = new RJButton[level, level]; // Задаем массив кнопок 
                 int numberMix;
                 int x, y;
                 Random rand = new Random();
@@ -59,13 +68,16 @@ namespace brothers_pilots
                 {
                     for (int j = 0; j < level; j++)
                     {
-                        levers[i, j] = new Button
+                        //levers[i, j] = new Button
+                        levers[i, j] = new RJButton
                         {
                             Size = new Size(size, size),
                             ImageKey = "0",
                             Location = new Point(i * size + (xshift), j * size + yshift),
                             Name = i.ToString() + ' ' + j.ToString(),
-                            BackColor = Color.FromArgb(240, 240, 240),
+                            BackColor = Color.FromArgb(50,0, 140, 240),
+                            //BackgroundColor = Control.DefaultBackColor,
+                            BorderColor = Color.Red ,
                             BackgroundImage = Properties.Resources.horizontal,
                             BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom,
 
@@ -92,16 +104,16 @@ namespace brothers_pilots
             }
             catch
             {
-                MessageBox.Show("Ваша машина устала...","Ошибка");
+                MessageBox.Show("Ваша машина устала...", "Ошибка");
                 panel2.Controls.Clear();
                 level = 2;
                 System.Threading.Thread.Sleep(700);
                 configuration();
                 StartGame();
-            }  
+            }
         }
 
-        
+
         //Нажатие на рычаг
         private void button_Click(object sender, EventArgs e)
         {
@@ -124,7 +136,7 @@ namespace brothers_pilots
         void finish()
         {
             win_sound.Play();
-            MessageBox.Show("Да вы медвежатник,шеф","МОЕ УВАЖЕНИЕ");
+            MessageBox.Show("Да вы медвежатник,шеф", "МОЕ УВАЖЕНИЕ");
             /*
             for (int i = 0; i < level; ++i)
                 for (int j = 0; j < level; ++j)
@@ -163,7 +175,7 @@ namespace brothers_pilots
                     MessageBox.Show("Всего хорошего!", "До новых встреч!");
                     Application.Exit();
                 }
-            }     
+            }
         }
         // Проверка победы
         bool CheckWin()
@@ -206,7 +218,7 @@ namespace brothers_pilots
             }
         }
 
-        
+
         // Изменение размерности (читерство)
         private void button1_Click(object sender, EventArgs e)
         {
@@ -237,7 +249,7 @@ namespace brothers_pilots
             if (level >= 15)
                 return true;
             else
-            return false;
+                return false;
         }
 
 
