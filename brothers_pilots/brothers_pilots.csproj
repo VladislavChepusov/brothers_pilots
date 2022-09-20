@@ -81,22 +81,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\horizontal.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\vertical.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\win.wav" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\bye.wav" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ico.png" />
+    <None Include="Resources\horizontal.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\pilot.png" />
+    <None Include="Resources\vertical.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

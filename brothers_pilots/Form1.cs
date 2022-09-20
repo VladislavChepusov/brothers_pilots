@@ -14,13 +14,45 @@ namespace brothers_pilots
         private int yshift = 0;// Сдвиг кубок от углов панеле
         SoundPlayer win_sound = new SoundPlayer(Properties.Resources.win);// Звук победы
         SoundPlayer bye_sound = new SoundPlayer(Properties.Resources.bye);// Грустный тромбон
-
+        public Button[,] levers;//Рычаги
         public Form1()
         {
             InitializeComponent();
         }
 
-        public Button[,] levers;//Рычаги
+        // Функция расчета размеров экрана и размеров рычагов
+        private void configuration()
+        {
+            this.WindowState = FormWindowState.Maximized;
+            //this.TopMost = true;
+
+            //panel1.Width = (int)(this.Width * 0.9);
+            //panel2.Width = (int)(this.Width * 0.9);
+            panel1.Width = (int)(this.Width);
+            panel1.Height = (int)(this.Height * 0.1);
+
+            panel2.Width = (int)(this.Width);
+            panel2.Height = (int)(this.Height * 0.89);
+            
+
+            label1.Text = $"Уровень {level - 1}";
+            label1.Left = this.Width / 2 - label1.Width;
+
+
+            size = sizecube(panel2.Height, panel2.Width);
+
+            //не лучшая моя идея
+            xshift = (panel2.Width - level * size) / 2;
+            yshift = (panel2.Height - level * size) / 2;
+        }
+
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            configuration();
+            StartGame();
+        }
+
         private void StartGame()
         {
             levers = new Button[level, level]; // Задаем массив кнопок 
@@ -37,8 +69,7 @@ namespace brothers_pilots
                         ImageKey ="0",
                         Location = new Point(i*size + xshift, j*size+ yshift),
                         Name = i.ToString() + ' ' + j.ToString(),
-                        BackColor = Color.White,
-                        //Image = Properties.Resources.horizontal,
+                        BackColor = Color.FromArgb(240, 240, 240),
                         BackgroundImage = Properties.Resources.horizontal,
                         BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom,
                         
@@ -84,31 +115,54 @@ namespace brothers_pilots
                 finish();
         }
 
+        // Переход на следующий раунд
         void finish()
         {
             win_sound.Play();
             MessageBox.Show("Да вы медвежатник,шеф","МОЕ УВАЖЕНИЕ");
-            
+          
+
             for (int i = 0; i < level; ++i)
                 for (int j = 0; j < level; ++j)
                 {
                     panel2.Controls.Remove(levers[i, j]);
                 }
-               
-            if (MessageBox.Show("Повышаем ставки?", "Вопросы к победилю", MessageBoxButtons.YesNo) == DialogResult.Yes)
+
+            level += 1;
+            if (endGame())
             {
-                level += 1;
-                configuration();
-                StartGame();
+                MessageBox.Show("Поздравляю с победой!", "Конец игры");
+                if (MessageBox.Show("Начать с начала?", "Вопросы к победилю", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    level = 2;
+                    configuration();
+                    StartGame();
+                }
+                else
+                {
+                    bye_sound.Play();
+                    MessageBox.Show("Всего хорошего!", "До новых встреч!");
+                    Application.Exit();
+                }
+
             }
             else
             {
-                bye_sound.Play();
-                MessageBox.Show("Всего хорошего!", "До новых встреч!");
-                Application.Exit();
-            }
+                if (MessageBox.Show("Повышаем ставки?", "Вопросы к победилю", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                   
+                    configuration();
+                    StartGame();
+                }
+                else
+                {
+                    bye_sound.Play();
+                    MessageBox.Show("Всего хорошего!", "До новых встреч!");
+                    Application.Exit();
+                }
+            }     
         }
-
+        // Проверка победы
         bool CheckWin()
         {
             int up = 0;
@@ -126,7 +180,7 @@ namespace brothers_pilots
         }
 
 
-        //Размер рычагов для вашего жкрана
+        //Размер рычагов для вашего экрана
         private int sizecube(int mHeight, int mWidth)
         {
             return Math.Min(mHeight / level, mWidth / level);
@@ -149,36 +203,8 @@ namespace brothers_pilots
             }
         }
 
-        // Функция расчета размеров экрана и размеров рычагов
-        private void configuration()
-        {
-            this.WindowState = FormWindowState.Maximized;
-            //this.TopMost = true;
-
-            panel1.Width = (int)(this.Width * 0.9);
-            panel2.Width = (int)(this.Width * 0.9);
-            panel1.Height = (int)(this.Height * 0.1);
-            panel2.Height = (int)(this.Height * 0.89);
-
-            label1.Text = $"Уровень {level - 1}";
-            label1.Left = panel1.Width / 2 - 50;
-
-
-            size = sizecube(panel2.Height, panel2.Width);
-
-            //не лучшая моя идея
-            xshift = (panel2.Width - level * size) / 2;
-            yshift = (panel2.Height - level * size) / 2;
-        }
-
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            configuration();
-            StartGame();
-        }
-       
-
+        
+        // Изменение размерности (читерство)
         private void button1_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < level; ++i)
@@ -197,6 +223,15 @@ namespace brothers_pilots
             configuration();
             StartGame();
 
+        }
+
+        //Конец игры
+        private bool endGame()
+        {
+            if (level >= 15)
+                return true;
+            else
+            return false;
         }
 
 

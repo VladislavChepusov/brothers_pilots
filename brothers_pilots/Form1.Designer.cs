@@ -61,6 +61,8 @@ namespace brothers_pilots
             // 
             // numericUpDown1
             // 
+            this.numericUpDown1.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.numericUpDown1.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.numericUpDown1.Location = new System.Drawing.Point(3, 13);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             15,
@@ -76,6 +78,7 @@ namespace brothers_pilots
             this.numericUpDown1.ReadOnly = true;
             this.numericUpDown1.Size = new System.Drawing.Size(120, 22);
             this.numericUpDown1.TabIndex = 2;
+            this.numericUpDown1.TabStop = false;
             this.numericUpDown1.ThousandsSeparator = true;
             this.numericUpDown1.Value = new decimal(new int[] {
             2,
@@ -125,8 +128,8 @@ namespace brothers_pilots
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }
 
