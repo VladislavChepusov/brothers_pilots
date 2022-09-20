@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Media;
 using System.Windows.Forms;
-
+using Microsoft.Win32;
 
 namespace brothers_pilots
 {
@@ -16,10 +16,15 @@ namespace brothers_pilots
         SoundPlayer bye_sound = new SoundPlayer(Properties.Resources.bye);// Грустный тромбон
         public Button[,] levers;//Рычаги
 
-
+        private Point loc;
+        private int x;
+        private int y;
         public Form1()
         {
             InitializeComponent();
+            loc = this.Location;
+            x = this.Width;
+            y = this.Height;
         }
 
 
@@ -246,15 +251,35 @@ namespace brothers_pilots
                 return false;
         }
 
+        
+        private void normal()
+        {
+            if (this.Location != loc)
+                this.Location = loc;
+            
+            if (this.Width != x)
+                this.Width = x;
+            
+            if (this.Height != y)
+                this.Height = y;
+
+            if (this.WindowState != FormWindowState.Maximized)
+                this.WindowState = FormWindowState.Maximized;
+        }
+
 
         private void Form1_Resize(object sender, EventArgs e)
         {
-            if (this.WindowState != FormWindowState.Maximized)
-            {
-                //this.Location = default;
-                this.WindowState = FormWindowState.Maximized;
-            }    
+            normal();
         }
+
+        private void Form1_ResizeEnd(object sender, EventArgs e)
+        {
+            normal();
+        }
+
+
+     
 
         /*
           private int sizecube(int mHeight, int mWidth )

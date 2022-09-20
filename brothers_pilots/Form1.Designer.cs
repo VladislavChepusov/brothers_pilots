@@ -119,6 +119,7 @@ namespace brothers_pilots
             this.Name = "Form1";
             this.Text = "Холодильник Пилотов";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.ResizeEnd += new System.EventHandler(this.Form1_ResizeEnd);
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
