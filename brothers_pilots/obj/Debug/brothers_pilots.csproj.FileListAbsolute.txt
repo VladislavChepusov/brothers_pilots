@@ -8,3 +8,13 @@ C:\Users\Vlados\source\repos\brothers_pilots\brothers_pilots\obj\Debug\brothers_
 C:\Users\Vlados\source\repos\brothers_pilots\brothers_pilots\obj\Debug\brothers_pilots.csproj.CoreCompileInputs.cache
 C:\Users\Vlados\source\repos\brothers_pilots\brothers_pilots\obj\Debug\brothers_pilots.exe
 C:\Users\Vlados\source\repos\brothers_pilots\brothers_pilots\obj\Debug\brothers_pilots.pdb
+C:\Users\Vlados\Desktop\brothers_pilots\brothers_pilots\bin\Debug\brothers_pilots.exe.config
+C:\Users\Vlados\Desktop\brothers_pilots\brothers_pilots\bin\Debug\brothers_pilots.exe
+C:\Users\Vlados\Desktop\brothers_pilots\brothers_pilots\bin\Debug\brothers_pilots.pdb
+C:\Users\Vlados\Desktop\brothers_pilots\brothers_pilots\obj\Debug\brothers_pilots.csproj.AssemblyReference.cache
+C:\Users\Vlados\Desktop\brothers_pilots\brothers_pilots\obj\Debug\brothers_pilots.Form1.resources
+C:\Users\Vlados\Desktop\brothers_pilots\brothers_pilots\obj\Debug\brothers_pilots.Properties.Resources.resources
+C:\Users\Vlados\Desktop\brothers_pilots\brothers_pilots\obj\Debug\brothers_pilots.csproj.GenerateResource.cache
+C:\Users\Vlados\Desktop\brothers_pilots\brothers_pilots\obj\Debug\brothers_pilots.csproj.CoreCompileInputs.cache
+C:\Users\Vlados\Desktop\brothers_pilots\brothers_pilots\obj\Debug\brothers_pilots.exe
+C:\Users\Vlados\Desktop\brothers_pilots\brothers_pilots\obj\Debug\brothers_pilots.pdb

@@ -15,10 +15,10 @@ namespace brothers_pilots
         SoundPlayer win_sound = new SoundPlayer(Properties.Resources.win);// Звук победы
         SoundPlayer bye_sound = new SoundPlayer(Properties.Resources.bye);// Грустный тромбон
         public Button[,] levers;//Рычаги
-
         private Point loc;
         private int x;
         private int y;
+
         public Form1()
         {
             InitializeComponent();
@@ -32,9 +32,6 @@ namespace brothers_pilots
         private void configuration()
         {
             this.WindowState = FormWindowState.Maximized;
-            //this.TopMost = true;
-            //panel1.Width = (int)(this.Width * 0.9);
-            //panel2.Width = (int)(this.Width * 0.9);
             panel1.Width = (int)(this.Width);
             panel1.Height = (int)(this.Height * 0.1);
             panel2.Width = (int)(this.Width);
@@ -135,13 +132,6 @@ namespace brothers_pilots
         {
             win_sound.Play();
             MessageBox.Show("Да вы медвежатник,шеф", "МОЕ УВАЖЕНИЕ");
-            /*
-            for (int i = 0; i < level; ++i)
-                for (int j = 0; j < level; ++j)
-                {
-                    panel2.Controls.Remove(levers[i, j]);
-                }
-            */
             panel2.Controls.Clear();
             level += 1;
             if (endGame())
@@ -207,7 +197,6 @@ namespace brothers_pilots
             if (button.ImageKey == "0")
             {
                 button.ImageKey = "1";
-                //button.Image = Properties.Resources.vertical;
                 button.BackgroundImage = Properties.Resources.vertical;
             }
             else
@@ -272,6 +261,7 @@ namespace brothers_pilots
         {
             normal();
         }
+
 
         private void Form1_ResizeEnd(object sender, EventArgs e)
         {
